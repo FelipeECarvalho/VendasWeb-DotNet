@@ -1,0 +1,36 @@
+﻿@model SalesWebMvc.Models.Seller
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Seller</h4>
+<hr />
+<div Class="row">
+    <div Class="col-md-4">
+        <form asp-action="Create">
+            <div Class="form-group">
+                <label asp-for="Name" Class="control-label"></label>
+                <input asp-for="Name" Class="form-control">
+            </div>
+            <div Class="form-group">
+                <label asp-for="Email" Class="control-label"></label>
+                <input asp-for="Email" Class="form-control">
+            </div>
+            <div Class="form-group">
+                <label asp-for="BirthDate" Class="control-label"></label>
+                <input asp-for="BirthDate" Class="form-control">
+            </div>
+            <div Class="form-group">
+                <label asp-for="Salary" Class="control-label"></label>
+                <input asp-for="Salary" Class="form-control">
+            </div>
+            <div Class="form-group">
+                <input type="submit" value="Create" class="btn btn-light" />
+            </div>
+        </form>
+    </div>
+</div>
