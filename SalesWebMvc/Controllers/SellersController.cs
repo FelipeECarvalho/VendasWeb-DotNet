@@ -42,6 +42,10 @@ namespace SalesWebMvc.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Create(Seller seller)
 		{
+			if (!ModelState.IsValid) 
+			{
+				return View(seller);
+			}
 			_sellerService.Insert(seller);
 			return RedirectToAction(nameof(Index));
 		}
@@ -114,6 +118,12 @@ namespace SalesWebMvc.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Edit(int Id,Seller seller) 
 		{
+			if (!ModelState.IsValid)
+			{
+				var departments = _departmentService.FindAll();
+				SellerFormViewModel viewModel = new SellerFormViewModel { Departments = departments, Seller = seller};
+				return View(viewModel);
+			}
 			if (Id != seller.Id)
 			{
 				return RedirectToAction(nameof(Error), (new { message = "Id mismatch" }));
