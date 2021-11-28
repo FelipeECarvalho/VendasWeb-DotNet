@@ -32,14 +32,29 @@ namespace SalesWebMvc.Controllers
 				finalDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 			}
 			ViewData["initialDate"] = initialDate.Value.ToString("yyyy-MM-dd");
-			ViewData["finalDate"] = finalDate.Value.ToString("yyyy-MM-dd");
+			ViewData["finalDate"] = finalDate.Value.ToString("yyyy/MM/dd");
+
 			var result = await _salesService.FindByDateAsync(initialDate, finalDate);
+
 			return View(result);
 		}
 
-		public IActionResult GroupingSearch()
+		public async Task<IActionResult> GroupingSearch(DateTime? initialDate, DateTime? finalDate)
 		{
-			return View();
+			if (!initialDate.HasValue)
+			{
+				initialDate = new DateTime(DateTime.Now.Year, 1, 1);
+			}
+			if (!finalDate.HasValue)
+			{
+				finalDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+			}
+
+			ViewData["initialDate"] = initialDate.Value.ToString("yyyy/MM/dd");
+			ViewData["finalDate"] = finalDate.Value.ToString("yyyy/MM/dd");
+			var result = await _salesService.FindByDateGroupingAsync(initialDate, finalDate);
+
+			return View(result);
 		}
 
 
